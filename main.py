@@ -5,12 +5,39 @@ class People:
         self.company = company
         self.position = position
         self.email = email
+        
 
     def show_customers_information(self):
         return f'Imię: {self.name} Nazwisko: {self.surname} Firma: {self.company} stanowisko: {self.position} e-mail: {self.email}'
 
     def show_customers_quick(self):
         return f'{self.name} {self.surname} {self.email}'
+
+    def contact(self):
+        return f'Kontaktuj się z {self.name} {self.surname} {self.position} {self.email}'
+
+    @property
+    def len_name_surname(self):
+        len_people = len(self.name) + len(self.surname) + 1
+        return f'Długość imienia i nazwiska {self.name} {self.surname} łącznie ze spacją między nimi wynosilen: {len_people}'
+        
+    
+class BaseContact(People):
+    def __init__(self, name, surname, email, phone):
+        super().__init__(name, surname, email)
+        self.phone = phone
+
+    def contact(self):
+        return f'Wybieram numer {self.phone} i dzwonię do {self.name} {self.surname}'
+
+
+class BusinessContact(People):
+    def __init__(self, position, company, business_phone ):
+        super().__init__(company, position)
+        self.business_phone = business_phone
+
+    def contact(self):
+        return f'Wybieram numer {self.business_phone} i dzwonię do {self.name} {self.surname}'
 
 
 customers1 = People('Tomasz', 'Madej', 'Starostwo Powiatowe w Puławach', 'kierownik', 'madtom@pulawy.powiat.pl')
@@ -42,3 +69,7 @@ print('')
 
 for i in customers:
     print(i.show_customers_information())
+print('')
+
+for i in customers:
+    print(i.len_name_surname)
